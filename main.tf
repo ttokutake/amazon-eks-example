@@ -21,6 +21,14 @@ resource "aws_vpc" "main" {
   }
 }
 
+resource "aws_internet_gateway" "main" {
+  vpc_id = aws_vpc.main.id
+
+  tags = {
+    Name = "eks_example"
+  }
+}
+
 resource "aws_subnet" "public_1" {
   vpc_id            = aws_vpc.main.id
   availability_zone = local.availability_zone_1
