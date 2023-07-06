@@ -29,6 +29,57 @@ resource "aws_internet_gateway" "main" {
   }
 }
 
+resource "aws_eip" "nat_gateway_1" {
+  tags = {
+    Name = "eks_example_private_1"
+  }
+}
+
+resource "aws_eip" "nat_gateway_2" {
+  tags = {
+    Name = "eks_example_private_2"
+  }
+}
+
+resource "aws_eip" "nat_gateway_3" {
+  tags = {
+    Name = "eks_example_private_3"
+  }
+}
+
+resource "aws_nat_gateway" "private_1" {
+  allocation_id = aws_eip.nat_gateway_1.id
+  subnet_id     = aws_subnet.public_1.id
+
+  tags = {
+    Name = "eks_example_private_1"
+  }
+
+  depends_on = [aws_internet_gateway.main]
+}
+
+resource "aws_nat_gateway" "private_2" {
+  allocation_id = aws_eip.nat_gateway_2.id
+  subnet_id     = aws_subnet.public_2.id
+
+  tags = {
+    Name = "eks_example_private_2"
+  }
+
+  depends_on = [aws_internet_gateway.main]
+}
+
+resource "aws_nat_gateway" "private_3" {
+  allocation_id = aws_eip.nat_gateway_3.id
+  subnet_id     = aws_subnet.public_3.id
+
+  tags = {
+    Name = "eks_example_private_3"
+  }
+
+  depends_on = [aws_internet_gateway.main]
+}
+
 resource "aws_subnet" "public_1" {
   vpc_id            = aws_vpc.main.id
   availability_zone = local.availability_zone_1
