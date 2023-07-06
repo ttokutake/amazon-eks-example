@@ -21,6 +21,66 @@ resource "aws_vpc" "main" {
   }
 }
 
+resource "aws_subnet" "public_1" {
+  vpc_id            = aws_vpc.main.id
+  availability_zone = local.availability_zone_1
+  cidr_block        = "192.168.0.0/19"
+
+  tags = {
+    Name = "eks_example_public_1"
+  }
+}
+
+resource "aws_subnet" "private_1" {
+  vpc_id            = aws_vpc.main.id
+  availability_zone = local.availability_zone_1
+  cidr_block        = "192.168.32.0/19"
+
+  tags = {
+    Name = "eks_example_private_1"
+  }
+}
+
+resource "aws_subnet" "public_2" {
+  vpc_id            = aws_vpc.main.id
+  availability_zone = local.availability_zone_2
+  cidr_block        = "192.168.64.0/19"
+
+  tags = {
+    Name = "eks_example_public_2"
+  }
+}
+
+resource "aws_subnet" "private_2" {
+  vpc_id            = aws_vpc.main.id
+  availability_zone = local.availability_zone_2
+  cidr_block        = "192.168.96.0/19"
+
+  tags = {
+    Name = "eks_example_private_2"
+  }
+}
+
+resource "aws_subnet" "public_3" {
+  vpc_id            = aws_vpc.main.id
+  availability_zone = local.availability_zone_3
+  cidr_block        = "192.168.128.0/19"
+
+  tags = {
+    Name = "eks_example_public_3"
+  }
+}
+
+resource "aws_subnet" "private_3" {
+  vpc_id            = aws_vpc.main.id
+  availability_zone = local.availability_zone_3
+  cidr_block        = "192.168.160.0/19"
+
+  tags = {
+    Name = "eks_example_private_3"
+  }
+}
+
 resource "aws_internet_gateway" "main" {
   vpc_id = aws_vpc.main.id
 
@@ -160,64 +220,4 @@ resource "aws_route_table_association" "private_2" {
 resource "aws_route_table_association" "private_3" {
   subnet_id      = aws_subnet.private_3.id
   route_table_id = aws_route_table.private_3.id
-}
-
-resource "aws_subnet" "public_1" {
-  vpc_id            = aws_vpc.main.id
-  availability_zone = local.availability_zone_1
-  cidr_block        = "192.168.0.0/19"
-
-  tags = {
-    Name = "eks_example_public_1"
-  }
-}
-
-resource "aws_subnet" "private_1" {
-  vpc_id            = aws_vpc.main.id
-  availability_zone = local.availability_zone_1
-  cidr_block        = "192.168.32.0/19"
-
-  tags = {
-    Name = "eks_example_private_1"
-  }
-}
-
-resource "aws_subnet" "public_2" {
-  vpc_id            = aws_vpc.main.id
-  availability_zone = local.availability_zone_2
-  cidr_block        = "192.168.64.0/19"
-
-  tags = {
-    Name = "eks_example_public_2"
-  }
-}
-
-resource "aws_subnet" "private_2" {
-  vpc_id            = aws_vpc.main.id
-  availability_zone = local.availability_zone_2
-  cidr_block        = "192.168.96.0/19"
-
-  tags = {
-    Name = "eks_example_private_2"
-  }
-}
-
-resource "aws_subnet" "public_3" {
-  vpc_id            = aws_vpc.main.id
-  availability_zone = local.availability_zone_3
-  cidr_block        = "192.168.128.0/19"
-
-  tags = {
-    Name = "eks_example_public_3"
-  }
-}
-
-resource "aws_subnet" "private_3" {
-  vpc_id            = aws_vpc.main.id
-  availability_zone = local.availability_zone_3
-  cidr_block        = "192.168.160.0/19"
-
-  tags = {
-    Name = "eks_example_private_3"
-  }
 }
