@@ -108,6 +108,60 @@ resource "aws_route_table_association" "public_3" {
   route_table_id = aws_route_table.public.id
 }
 
+resource "aws_route_table" "private_1" {
+  vpc_id = aws_vpc.main.id
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_nat_gateway.private_1.id
+  }
+
+  tags = {
+    Name = "eks_example_private_1"
+  }
+}
+
+resource "aws_route_table" "private_2" {
+  vpc_id = aws_vpc.main.id
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_nat_gateway.private_2.id
+  }
+
+  tags = {
+    Name = "eks_example_private_2"
+  }
+}
+
+resource "aws_route_table" "private_3" {
+  vpc_id = aws_vpc.main.id
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_nat_gateway.private_3.id
+  }
+
+  tags = {
+    Name = "eks_example_private_3"
+  }
+}
+
+resource "aws_route_table_association" "private_1" {
+  subnet_id      = aws_subnet.private_1.id
+  route_table_id = aws_route_table.private_1.id
+}
+
+resource "aws_route_table_association" "private_2" {
+  subnet_id      = aws_subnet.private_2.id
+  route_table_id = aws_route_table.private_2.id
+}
+
+resource "aws_route_table_association" "private_3" {
+  subnet_id      = aws_subnet.private_3.id
+  route_table_id = aws_route_table.private_3.id
+}
+
 resource "aws_subnet" "public_1" {
   vpc_id            = aws_vpc.main.id
   availability_zone = local.availability_zone_1
