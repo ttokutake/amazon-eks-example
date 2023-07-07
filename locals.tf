@@ -7,4 +7,6 @@ locals {
   availability_zone_3 = "ap-northeast-1d"
 
   account_id = data.aws_caller_identity.current.account_id
+
+  eks_cluster_name = "eks_example"
 }

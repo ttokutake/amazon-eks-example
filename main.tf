@@ -25,7 +25,7 @@ resource "aws_iam_role_policy_attachment" "cluster_role_attachment" {
 }
 
 resource "aws_eks_cluster" "main" {
-  name     = "eks_example"
+  name     = local.eks_cluster_name
   role_arn = aws_iam_role.cluster_role.arn
 
   vpc_config {
