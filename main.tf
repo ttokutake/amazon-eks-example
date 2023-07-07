@@ -16,7 +16,7 @@ provider "aws" {
 resource "aws_iam_role" "cluster_role" {
   name = "AmazonEKSExampleClusterRole"
 
-  assume_role_policy = file("./policies/eks-cluster-role-trust-policy.json")
+  assume_role_policy = file("${path.module}/policies/eks-cluster-role-trust-policy.json")
 }
 
 resource "aws_iam_role_policy_attachment" "cluster_role_attachment" {
