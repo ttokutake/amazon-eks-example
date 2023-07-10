@@ -84,6 +84,6 @@ resource "aws_eks_fargate_profile" "example" {
   ]
 
   selector {
-    namespace = "default"
+    namespace = "eks-sample-app"
   }
 }
