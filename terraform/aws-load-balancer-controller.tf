@@ -5,7 +5,7 @@ resource "aws_iam_policy" "load_balancer_controller_policy" {
 }
 
 locals {
-  oidc_id = split("/", aws_eks_cluster.main.identity.0.oidc.0.issuer).4
+  oidc_id = split("/", local.oidc_url).4
 }
 
 resource "aws_iam_role" "load_balancer_controller_role" {
