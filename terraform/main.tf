@@ -73,7 +73,7 @@ resource "aws_iam_role_policy_attachment" "pod_execution_role_attachment" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSFargatePodExecutionRolePolicy"
 }
 
-resource "aws_eks_fargate_profile" "example" {
+resource "aws_eks_fargate_profile" "main" {
   cluster_name           = aws_eks_cluster.main.name
   fargate_profile_name   = "profile_example"
   pod_execution_role_arn = aws_iam_role.pod_execution_role.arn
