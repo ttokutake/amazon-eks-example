@@ -7,6 +7,3 @@ kubectl create namespace eks-sample-app
 
 kubectl apply -f ${kubernetes_dir}/eks-sample-service.yaml
 kubectl apply -f ${kubernetes_dir}/eks-sample-deployment.yaml
-
-aws_account_id=$(aws sts get-caller-identity --query "Account" --output text)
-sed -e "s/{{AWS_ACCOUNT_ID}}/${aws_account_id}/" ${kubernetes_dir}/aws-load-balancer-controller-service-account.yaml | kubectl apply -f -
