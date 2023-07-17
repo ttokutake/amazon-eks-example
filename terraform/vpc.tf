@@ -12,7 +12,8 @@ resource "aws_subnet" "public_1" {
   cidr_block        = "192.168.0.0/19"
 
   tags = {
-    Name = "eks_example_public_1"
+    Name                     = "eks_example_public_1"
+    "kubernetes.io/role/elb" = "1"
   }
 }
 
@@ -32,7 +33,8 @@ resource "aws_subnet" "public_2" {
   cidr_block        = "192.168.64.0/19"
 
   tags = {
-    Name = "eks_example_public_2"
+    Name                     = "eks_example_public_2"
+    "kubernetes.io/role/elb" = "1"
   }
 }
 
@@ -52,7 +54,8 @@ resource "aws_subnet" "public_3" {
   cidr_block        = "192.168.128.0/19"
 
   tags = {
-    Name = "eks_example_public_3"
+    Name                     = "eks_example_public_3"
+    "kubernetes.io/role/elb" = "1"
   }
 }
 
