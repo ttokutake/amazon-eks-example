@@ -1,0 +1,10 @@
+#!/bin/bash
+
+dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")")
+kubernetes_dir=${dir}/../kubernetes
+
+kubectl delete -f ${kubernetes_dir}/eks-sample-ingress.yaml
+kubectl delete -f ${kubernetes_dir}/eks-sample-service.yaml
+kubectl delete -f ${kubernetes_dir}/eks-sample-deployment.yaml
+
+kubectl delete namespace eks-sample-app

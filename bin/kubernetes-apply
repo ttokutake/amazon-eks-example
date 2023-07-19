@@ -5,5 +5,6 @@ kubernetes_dir=${dir}/../kubernetes
 
 kubectl create namespace eks-sample-app
 
-kubectl apply -f ${kubernetes_dir}/eks-sample-service.yaml
 kubectl apply -f ${kubernetes_dir}/eks-sample-deployment.yaml
+kubectl apply -f ${kubernetes_dir}/eks-sample-service.yaml
+kubectl apply -f ${kubernetes_dir}/eks-sample-ingress.yaml

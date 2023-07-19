@@ -87,3 +87,19 @@ resource "aws_eks_fargate_profile" "main" {
     namespace = "eks-sample-app"
   }
 }
+
+locals {
+  oidc_url = aws_eks_cluster.main.identity.0.oidc.0.issuer
+}
+
+data "tls_certificate" "main" {
+  url = local.oidc_url
+}
+
+resource "aws_iam_openid_connect_provider" "main" {
+  url = local.oidc_url
+
+  client_id_list = ["sts.amazonaws.com"]
+
+  thumbprint_list = [data.tls_certificate.main.certificates.0.sha1_fingerprint]
+}
