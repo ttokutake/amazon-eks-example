@@ -1,6 +1,6 @@
-resource "aws_eks_fargate_profile" "kube-system" {
+resource "aws_eks_fargate_profile" "core_dns" {
   cluster_name           = aws_eks_cluster.main.name
-  fargate_profile_name   = "kube-system"
+  fargate_profile_name   = "core_dns_profile"
   pod_execution_role_arn = aws_iam_role.pod_execution_role.arn
   subnet_ids = [
     aws_subnet.private_1.id,
@@ -10,5 +10,8 @@ resource "aws_eks_fargate_profile" "kube-system" {
 
   selector {
     namespace = "kube-system"
+    labels = {
+      "k8s-app" = "kube-dns"
+    }
   }
 }
